@@ -1,0 +1,45 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>无标题文档</title>
+</head>
+
+<body>
+	<script>
+		var year = 2016;
+		function a(year) {
+			if (year % 400 == 0) {
+				return true;
+			}
+			else if (year % 4 == 0 && year % 100 != 0) {
+				return true;
+			}
+			else { return false; }
+		}
+
+		if (a(year)) { document.write(year + "是闰年" + "<br>") }
+		else { document.write(year + "是平年" + "<br>") }
+
+
+		var color = ["red", "blue", "yello", "green", "orange"]
+		function bcolor() {
+			var b = Math.floor(Math.random() * 5);
+			document.bgColor = color[b];
+		}
+
+		function xl() {
+			var guojing = { name: "郭靖" };
+			guojing.zs = ["亢龙有悔", "飞龙在天", "见龙在田"];
+			var s = Math.floor(Math.random() * 3);
+			alert(guojing.name + "使用了一招" + guojing.zs[s]);
+		}
+	</script>
+	<input type="button" value="更换背景颜色" onclick="bcolor()" />
+	<input type="button" value="降龙十八掌" onclick="xl()" />
+
+</body>
+
+</html>

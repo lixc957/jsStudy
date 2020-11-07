@@ -1,0 +1,39 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>无标题文档</title>
+</head>
+
+<body>
+	测试1：<input type="text" id="txtone" value="测试1" /><br />
+	测试2：<input type="text" id="txtwo" value="测试2" /><br /><br />
+	<input type="button" value="弹出测试1的type属性" onclick="getAttr()" />
+	<input type="button" value="把测试2type属性设置成button" onclick="setAttrOne()" />
+	<input type="button" value="移除测试1的value属性" onclick="removeAttr()" />
+	<input type="button" value="把测试2type属性设置成text" onclick="setAttrTwo()" />
+	<script>
+		var txtone = document.getElementById("txtone");
+		var txtwo = document.getElementById("txtwo");
+		function getAttr() {
+			var str1 = txtone.getAttribute("type");
+			alert(str1)
+		}
+
+		function setAttrOne() {
+			txtwo.setAttribute("type", "button");
+		}
+
+		function removeAttr() {
+			txtone.removeAttribute("value")
+		}
+
+		function setAttrTwo() {
+			txtwo.setAttribute("type", "text");
+		}
+	</script>
+</body>
+
+</html>

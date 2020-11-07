@@ -1,0 +1,27 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>无标题文档</title>
+</head>
+
+<body>
+	<script>
+		function c() {
+			var re = prompt("请输入圆的半径", "0");
+			var r = parseFloat(re);
+			var s = Math.PI * r * r;
+			alert("圆的面积为：" + s);
+			var co = confirm("您对这个计算功能满意吗");
+			if (co) {
+				alert("谢谢");
+			}
+			else { alert("卧槽"); }
+		}
+	</script>
+	<input type="button" value="计算圆的面积" onclick="c()" />
+</body>
+
+</html>

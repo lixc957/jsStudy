@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+div
+{width:300px; height:200px; background:orange;
+margin:15px auto; padding-top:15px; text-align:center;
+	}
+input{ margin:5px 5px;
+padding:5px;}
+</style>
+</head>
+
+<body>
+<div>
+<h3>计算圆的面积</h3>
+<label for="A">半径：</label>
+<input type="text" id="A" /><br />
+<label for="B">面积：</label>
+<input type="text" id="B" /><br />
+<input type="button" value="计算" onclick="show()"/>
+<input type="button" value="清空" onclick="cl()"/>
+</div>
+<script>
+function carea(r)
+{
+   var s=Math.PI*r*r;
+   return s;
+	}
+	
+function show()
+{
+	var A=document.getElementById("A").value;
+	var B=carea(A);
+	
+	document.getElementById("B").value=B;
+	}
+	
+function cl()
+{
+	document.getElementById("A").value="";
+	document.getElementById("B").value="";
+	}
+</script>
+
+</body>
+</html>

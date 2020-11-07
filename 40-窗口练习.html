@@ -1,0 +1,59 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>无标题文档</title>
+	<style>
+		input {
+			margin-top: 15px;
+			width: 150px;
+			height: 30px;
+		}
+	</style>
+</head>
+
+<body>
+	<script>
+		function openIn() {
+			a = window.open("http://www.baidu.com", "","width=300,height=300");
+			a.focus();
+		}
+
+		function closeIn() {
+			a.close();
+		}
+
+		function moveTo() {
+			a.moveTo(300, 300);
+			a.focus();
+		}
+
+		function moveBy() {
+			a.moveBy(30, 30);
+			a.focus();
+		}
+
+		function resizeTo() {
+			a.resizeTo(500, 500);
+			a.focus();
+		}
+
+		function resizeBy() {
+			a.resizeBy(30, 30);
+			a.focus();
+		}
+	</script>
+	<div style="width: 500px; float: right;">
+		<input type="button" value="open" onclick="openIn()" /><br />
+		<input type="button" value="close" onclick="closeIn()" /><br />
+		<input type="button" value="moveTo" onclick="moveTo()" /><br />
+		<input type="button" value="moveBy" onclick="moveBy()" /><br />
+		<input type="button" value="resizeTo" onclick="resizeTo()" /><br />
+		<input type="button" value="resizeBy" onclick="resizeBy()" />
+	</div>
+	
+</body>
+
+</html>

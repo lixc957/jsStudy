@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<canvas id="canvas" width="600px" height="300px" style="border:1px solid #c3c3c3"></canvas>
+<script>
+  function dow1(){
+	  var c=document.getElementById("canvas");
+	  var t=c.getContext("2d");
+	  for(i=0;i<12;i++){
+	  for(j=0;j<24;j++)
+	  {  
+	  t.fillStyle='rgb(240,'+(255-11*i)+','+(255-11*j)+')';
+	  t.beginPath();
+	  t.arc(12.5+j*25,12.5+i*25,10,0,Math.PI*2,true);
+	  t.closePath();
+	  t.fill();
+	  }
+   }
+}
+dow1();
+</script>
+</body>
+</html>

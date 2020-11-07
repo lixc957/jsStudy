@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+function colck()
+{
+	var today=new Date();
+	var year=today.getFullYear();
+	var month=today.getMonth();
+	var date=today.getDate();
+	var h=today.getHours();
+	var m=today.getMinutes();
+	var s=today.getSeconds();
+	var str="现在时间：";
+	
+	str+=year+"年"+(month+1)+"月"+date+"日"+h+"时"+m+"分"+s+"秒";
+	
+	var clock=document.getElementById("clock");
+	clock.value=str;
+	}
+	var timeId=setInterval("colck()",1000);
+</script>
+<input type="text" id="clock" size="50" />&nbsp;<input type="button" value="停止" onclick="clearInterval(timeId)" />
+</body>
+</html>

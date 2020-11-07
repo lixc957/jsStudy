@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        select {
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <select name="" id="s1" size="10">
+        <option value="苹果">苹果</option>
+        <option value="香蕉">香蕉</option>
+        <option value="西瓜">西瓜</option>
+        <option value="橘子">橘子</option>
+        <option value="西红柿">西红柿</option>
+        <option value="梨子">梨子</option>
+        <option value="葡萄">葡萄</option>
+    </select>
+    <button>&gt;</button>
+    <select name="" id="s2" size="10"></select>
+</body>
+<script>
+    var btn = document.querySelector("button");
+    var s1 = document.querySelector("#s1");
+    var s2 = document.querySelector("#s2");
+
+    btn.onclick = function() {
+        var index = s1.selectedIndex; //返回s1元素的索引号
+        if (index > -1) { //判断是否选择了元素
+            s2.add(s1.options[index]); //options 是 select 下的元素集合
+        } else {
+            alert('请选择水果');
+        }
+    }
+</script>
+
+</html>

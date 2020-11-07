@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>标题</title>
+    <style>
+        .father {
+            width: 200px;
+            height: 400px;
+            background-color: skyblue;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .son {
+            width: 200px;
+            height: 100px;
+            background-color: pink;
+            cursor: move;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="father" id="father">
+        <div class="son" id="son"></div>
+    </div>
+    <script>
+        let son = document.querySelector('#son'),
+            father = document.querySelector('#father');
+
+        son.onmousedown = function(e) {
+            let pageX = e.pageX - father.offsetLeft,
+                pageY = e.pageY - father.offsetTop;
+            window.onmousemove = function(e) {
+                let x = e.pageX - pageX,
+                    y = e.pageY - pageY;
+
+                father.style.left = x + 'px';
+                father.style.top = y + 'px'
+            }
+        }
+
+        son.onmouseup = function() {
+            window.onmousemove = null
+        }
+    </script>
+</body>
+
+</html>

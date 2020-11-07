@@ -1,0 +1,70 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>计时器</title>
+</head>
+
+<body>
+  <table width="200" border="0">
+    <tr>
+      <center>
+        <td><input name="tzdm" type="button" value="停止读秒" onclick="stop()"></td>
+      </center>
+      <center>
+        <td><input name="num" id="num" type="text" value="00时00分00秒000毫秒" readonly="readonly"></td>
+      </center>
+      <center>
+        <td><input name="ksjm" type="button" value="开始记秒" onclick="start()"></td>
+      </center>
+      <center>
+        <td><input name="mbgl" type="button" value="秒表归零" onclick="Reset()"></td>
+      </center>
+    </tr>
+  </table>
+
+
+  <script>
+    var hour, minute, second, millisecond = 0;//时 分 秒
+    hour = minute = second = millisecond = 0;//初始化
+    var int;
+    function Reset()//归零
+    {
+      window.clearInterval(int);
+      millisecond = hour = minute = second = 0;
+      document.getElementById("num").value = "00时00分00秒00毫秒";
+    }
+
+    function start()//开始
+    {
+      int = setInterval(timer, 50);
+    }
+
+    function timer()//计时
+    {
+      millisecond = millisecond + 50;
+      if (millisecond > 999) {
+        millisecond = 0;
+        second = second + 1;
+      }
+      if(second > 59) {
+        second = 0;
+        minute = minute + 1;
+      }
+      if (minute > 59) {
+        minute = 0;
+        hour = hour + 1;
+      }
+      document.getElementById("num").value = hour + "时" + minute + "分" + second + "秒" + millisecond + "毫秒";
+    }
+
+    function stop()//暂停
+    {
+      window.clearInterval(int);
+    }
+  </script>
+</body>
+
+</html>

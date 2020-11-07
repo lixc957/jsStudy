@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+ var a=["苹果","葡萄","香蕉","石榴"];
+ a.push("西瓜","梨子");
+ delete a[0];
+ document.write(a+"<br>");
+ 
+ var b=["苹果","葡萄","香蕉","石榴"];
+ b.push("西瓜","梨子");
+ b.pop();
+ document.write(b+"<br>");
+ 
+ var c=["苹果","葡萄","香蕉","石榴"];
+ c.unshift("西瓜","梨子");
+ c.shift();
+ document.write(c+"<br>");
+ 
+ var d=["苹果","葡萄","香蕉","石榴"];
+ d.unshift("西瓜","梨子");
+ d.reverse();
+ document.write(d+"<br>");
+ 
+ var e=[9,17,38,4];
+ e.unshift(52,6);
+ e.sort(sortfun);
+ document.write(e+"<br>");
+ function sortfun(t1,t2)
+ {
+	 if(t1>t2)
+	 {
+		 return 1;
+		 }else if(t1<t2)
+		 {
+			return -1; 
+			 }else
+			 {
+				return 0; 
+				 }
+	 }
+	 
+ var arr1=["苹果","葡萄","香蕉","石榴"];
+ var arr2=["西瓜","梨子"];
+ var arr=arr1.concat(arr2);
+ document.write(arr+"<br>");
+ 
+ var f=["苹果","葡萄","香蕉","石榴"];
+ f.splice(1,0,"西瓜","梨子");
+ document.write(f+"<br>");
+  
+ var g=["苹果","葡萄","香蕉","石榴"];
+ g.splice(1,2,"西瓜","梨子");
+ document.write(g+"<br>");
+ 
+ var per=["苹果","葡萄","香蕉","石榴"];
+ for(x in per)
+ {
+	 if(x%2==0)
+	 {
+		 ducument.write(per[x])
+		 }
+	 }
+</script>
+</body>
+</html>

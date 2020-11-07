@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let url = 'http://www.heima.com?key0=haha&key1=hello&key2=xixi';
+        //找到第一个 ? 的位置
+        let n = str.indexOf('?');
+        //从 ? 的后一个位置开始切取字符串
+        str = str.substring(n + 1);
+        let obj = {},
+            aParams = url.split("&"); /* 以 & 为界把字符串切割成数组 */
+        //遍历数组中的 value 
+        for (i = 0; i < aParams.length; i++) {
+            //以 = 为界把数组里的每个 value 再切割成数组
+            let aParam = aParams[i].split("=");
+            //对象的 key 就数组的第一个 value,对象的 value 就数组的第二个 value　
+            obj[aParam[0]] = aParam[1]
+        }
+        console.log(obj);
+    </script>
+</body>
+
+</html>

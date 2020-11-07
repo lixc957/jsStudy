@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: 0;
+        }
+        
+        .all {
+            width: 500px;
+            height: 200px;
+            padding: 7px;
+            border: 1px solid #ccc;
+            margin: 100px auto;
+            position: relative;
+        }
+        
+        .screen {
+            width: 500px;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .screen li {
+            width: 500px;
+            height: 200px;
+            overflow: hidden;
+            float: left;
+        }
+        
+        .screen ul {
+            position: absolute;
+            left: 0;
+            top: 0px;
+            width: 3500px;
+        }
+        
+        .all ol {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            line-height: 20px;
+            text-align: center;
+        }
+        
+        .all ol li {
+            float: left;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border: 1px solid #ccc;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        
+        .all ol li.current {
+            background: yellow;
+        }
+        
+        #arr {
+            display: none;
+        }
+        
+        #arr span {
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            margin-top: -20px;
+            background: #000;
+            cursor: pointer;
+            line-height: 40px;
+            text-align: center;
+            font-weight: bold;
+            font-family: '黑体';
+            font-size: 30px;
+            color: #fff;
+            opacity: 0.3;
+            border: 1px solid #fff;
+        }
+        
+        #arr #right {
+            right: 5px;
+            left: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="all" id="box">
+        <div class="screen">
+            <ul>
+                <li><img src="images/1.jpg" width="500" height="200" /></li>
+                <li><img src="images/2.jpg" width="500" height="200" /></li>
+                <li><img src="images/3.jpg" width="500" height="200" /></li>
+                <li><img src="images/4.jpg" width="500" height="200" /></li>
+                <li><img src="images/5.jpg" width="500" height="200" /></li>
+            </ul>
+            <ol>
+                <!-- 动态创建的小方块，添加在这里，样式已经给写好了-->
+            </ol>
+        </div>
+        <div id="arr">
+            <span id="left">&lt;</span>
+            <span id="right">&gt;</span>
+        </div>
+    </div>
+
+
+    <script>
+        //获取元素
+        let box = document.querySelector('#box');
+        let screen = document.querySelector('.screen');
+        let ul1 = document.querySelector('.screen ul');
+        let lis = ul1.querySelectorAll('li');
+        let ol1 = document.querySelector('.screen ol');
+        let arr = document.querySelector('#arr');
+        //获取一张轮播图的宽度
+        let adWidth = screen.offsetWidth;
+        //克隆图片
+        let firstLi = ul1.querySelector('li:first-of-type');
+        let lastLi = ul1.querySelector('li:last-of-type');
+        ul1.appendChild(firstLi.cloneNode(true));
+        ul1.insertBefore(lastLi.cloneNode(true), firstLi);
+        //3.设置默认偏移
+        ul1.style.left = -adWidth + 'px';
+        //定义索引
+        let index = 0;
+        //1.创建ol下的小li
+        //循环，有几张图片就创建几个小方块
+        for (let i = 0; i < lis.length; i++) {
+            let li = document.createElement('li');
+            li.innerText = i + 1;
+            ol1.appendChild(li);
+            //第一个li加个样式
+            ol1.children[0].className = 'current';
+            //给每个li加个index属性
+            ol1.children[i].setAttribute('index', i);
+        }
+
+        //获取ol下的所有li
+        let olis = ol1.querySelectorAll('li');
+        //2.给ol绑定监听事件,捕获小方块
+        ol1.addEventListener('click', function() {
+            for (let i = 0; i < olis.length; i++) {
+                //点击小方块切换样式
+                olis[i].onclick = function() {
+                    //每次点击索引号等于当前点击的index属性值
+                    index = this.getAttribute('index');
+                    for (let j = 0; j < olis.length; j++) {
+                        olis[j].className = '';
+                    }
+                    this.className = 'current';
+                    //设置过渡效果
+                    ul1.style.transition = 'all .3s ease';
+                    //设置偏移，因为默认前面有一张图，所以要加一个偏移量
+                    ul1.style.left = -(index * adWidth + adWidth) + 'px';
+                }
+            }
+        }, true)
+
+        //3.封装函数,自动切换
+        function adEffect() {
+            index++;
+            for (let i = 0; i < olis.length; i++) {
+                olis[i].className = '';
+            }
+            //判定是否到最后一张,设置延时，不然跟上面的步骤同时进行
+            if (index == olis.length) {
+                setTimeout(function() {
+                    index = 0;
+                    //关闭过渡效果
+                    ul1.style.transition = 'none';
+                    //重新设置默认偏移
+                    ul1.style.left = -(index * adWidth + adWidth) + 'px';
+                    olis[index].className = 'current';
+                }, 300)
+            }
+            ul1.style.transition = 'all .3s ease';
+            ul1.style.left = -(index * adWidth + adWidth) + 'px';
+            if (0 <= index && index < olis.length) olis[index].className = 'current';
+        }
+
+        let t = setInterval(adEffect, 3000);
+
+        //4.鼠标移入盒子左右箭头显示
+        box.onmouseenter = function() {
+                clearInterval(t);
+                arr.style.display = 'block'
+            }
+            //4.鼠标移出盒子左右箭头显示
+        box.onmouseleave = function() {
+            t = setInterval(adEffect, 3000);
+            arr.style.display = 'none'
+        }
+
+        //5.点击左右箭头切换轮播图
+        let next = document.querySelector('#right');
+        let prev = document.querySelector('#left');
+
+        next.onclick = function() {
+            adEffect();
+        }
+        prev.onclick = function() {
+            index--;
+            for (let i = 0; i < olis.length; i++) {
+                olis[i].className = '';
+            }
+            //判定是否到第一张,设置延时，不然跟上面的步骤同时进行
+            if (index < 0) {
+                setTimeout(function() {
+                    index = olis.length - 1;
+                    //关闭过渡效果
+                    ul1.style.transition = 'none';
+                    //重新设置默认偏移
+                    ul1.style.left = -(index * adWidth + adWidth) + 'px';
+                    olis[index].className = 'current';
+                }, 300)
+            }
+            ul1.style.transition = 'all .3s ease';
+            ul1.style.left = -(index * adWidth + adWidth) + 'px';
+            if (0 <= index && index < olis.length) olis[index].className = 'current';
+        }
+    </script>
+</body>
+
+</html>

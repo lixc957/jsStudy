@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .box {
+            width: 350px;
+            height: 350px;
+            margin: 100px;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+        
+        .big {
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            top: 0;
+            left: 360px;
+            border: 1px solid #ccc;
+            overflow: hidden;
+            display: none;
+        }
+        
+        .mask {
+            width: 175px;
+            height: 175px;
+            background: rgba(255, 255, 0, 0.4);
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: move;
+            display: none;
+        }
+        
+        .small {
+            position: relative;
+        }
+        
+        .box img {
+            vertical-align: top;
+        }
+        
+        #bigBox>img {
+            /*是让里面的图片脱标，为的就是让里面的图片进行一个移动*/
+            position: absolute;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="box" id="box">
+        <div class="small" id="smallBox">
+            <img src="images/001.jpg" width="350" alt="" />
+
+            <div class="mask" id="mask"></div>
+        </div>
+        <div class="big" id="bigBox">
+            <img id="bigImg" src="images/0001.jpg" width="800" alt="" />
+        </div>
+    </div>
+
+
+    <script>
+        //1.获取页面滚出去的距离,封装成一个函数
+        function getPageScroll() {
+            return {
+                scrollLeft: window.pageXOffset ||
+                    document.documentElement.scrollLeft ||
+                    document.body.scrollLeft ||
+                    0,
+                scrollTop: window.pageYOffset ||
+                    document.documentElement.scrollTop ||
+                    document.body.scrollTop ||
+                    0
+            };
+        }
+
+        //2.获取页面可视区宽高,有兼容性,所以封装成一个函数
+        function getPageClient() {
+            return {
+                clientWidth: window.innerWidth ||
+                    document.documentElement.clientWidth ||
+                    document.body.clientWidth ||
+                    0,
+                clientHeight: window.innerHeight ||
+                    document.documentElement.clientHeight ||
+                    document.body.clientHeight ||
+                    0
+            }
+        }
+
+        //由于e.pageX在老的浏览器中直接拿不到值,所以要处理获取.写一个函数做兼容
+        function getEventPageXY(e) {
+            e = e || window.event;
+            return {
+                pageX: e.clientX + document.documentElement.scrollLeft,
+                pageY: e.clientY + document.documentElement.scrollTop
+            }
+        }
+
+        //1.获取DOM元素
+        let smallBox = document.querySelector('#smallBox'),
+            mask = document.querySelector('#mask'),
+            bigBox = document.querySelector('#bigBox');
+
+        //2.鼠标移入移出，遮罩层及大图片显示隐藏
+        smallBox.onmouseenter = function() {
+            mask.style.display = 'block';
+            bigBox.style.display = 'block';
+        }
+
+        smallBox.onmouseleave = function() {
+            mask.style.display = 'none';
+            bigBox.style.display = 'none';
+        }
+
+        //3.设置鼠标移动事件
+        smallBox.onmousemove = function(e) {
+
+            //获取鼠标距离页面的坐标
+            let pageX = e.pageX,
+                pageY = e.pageY;
+
+            //设置遮罩层应该偏移的坐标
+            let x = (pageX - 1 - box.offsetLeft) / 2,
+                y = (pageY - 1 - box.offsetTop) / 2;
+            console.log(x, y);
+            //判断,不能让遮罩层超出盒子
+            x = x < 0 ? 0 : x;
+            x = x > smallBox.offsetWidth - mask.offsetWidth ? smallBox.offsetWidth - mask.offsetWidth : x;
+            y = y < 0 ? 0 : y;
+            y = y > smallBox.offsetHeight - mask.offsetHeight ? smallBox.offsetHeight - mask.offsetHeight : y;
+
+            //设置遮罩层偏移坐标
+            mask.style.left = x + 'px';
+            mask.style.top = y + 'px';
+
+            //设置大图片的偏移坐标,按比例偏移
+            bigImg.style.left = -(bigImg.offsetWidth / smallBox.offsetWidth) * x + 'px';
+            bigImg.style.top = -(bigImg.offsetHeight / smallBox.offsetHeight) * y + 'px';
+        }
+    </script>
+</body>
+
+</html>

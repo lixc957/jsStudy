@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let names = ['zhangsan', 'lisi', 'wangwu', 'lisi', 'wangwu'];
+
+        let countedNames = names.reduce(function(allNames, name) {
+            if (name in allNames) {
+                //重复出现 +1
+                allNames[name]++;
+            } else {
+                //第一次出现赋值 = 1
+                allNames[name] = 1;
+            }
+            return allNames;
+        }, {});
+        console.log(countedNames); //{zhangsan: 1, lisi: 2, wangwu: 2}
+    </script>
+</body>
+
+</html>
